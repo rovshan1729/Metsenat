@@ -30,7 +30,9 @@ class Dashboard(BaseModel):
 class Sponsors(BaseModel):
     full_name = models.CharField(max_length=255)
     phone_number = models.IntegerField()
-    sponsorship_amount = models.IntegerField()
+    sponsorship_amount = models.IntegerField(
+        validators=[MinValueValidator(0),MaxValueValidator(50000000)]
+    )
     amount_spend = models.IntegerField()
     STATUS_CHOICES = [
         ('barchasi','Barchasi'),
@@ -140,7 +142,10 @@ class EditSponsor(BaseModel):
 
 
 class AddSponsor(BaseModel):
-    sponsors = models.ForeignKey(Sponsors,on_delete=models.CASCADE)
+    sponsors = models.ForeignKey(Sponsors,on_delete=models.CASCADE,null=False)
     allocated_amount = models.IntegerField(
         validators=[MinValueValidator(0),MaxValueValidator(30000000)]
     )
+
+    def __str__(self) -> str:
+        return str(self.sponsors)
