@@ -7,6 +7,7 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.pagination import PageNumberPagination
 
 
 
@@ -77,6 +78,8 @@ class StudentFilterRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAP
 class StudentListCreateAPIView(generics.ListCreateAPIView):
     queryset = models.Students.objects.all()
     serializer_class = serializers.StudentSerializer
+    pagination_class = PageNumberPagination
+    page_size = 10
 
 
 class StudentRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
@@ -110,6 +113,8 @@ class EditingLegalEntityRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDest
 class AboutSponsorListCreateAPIView(generics.ListCreateAPIView):
     queryset = models.AboutSponsor.objects.all()
     serializer_class = serializers.AboutSponsorSerializer
+    pagination_class = PageNumberPagination
+    page_size = 10
 
 
 class AboutSponsorRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):

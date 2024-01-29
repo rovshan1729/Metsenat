@@ -83,6 +83,7 @@ class EditingIndividual(BaseModel):
     ]
     payment_type = models.CharField(max_length=40,choices=CHOICE_PAYMENT_TYPE,default='naqt')
 
+
 class EditingLegalEntity(BaseModel):
     sponsor = models.ForeignKey(Sponsors,on_delete=models.CASCADE)
     editIndividual = models.ForeignKey(EditingIndividual,on_delete=models.CASCADE)
@@ -124,6 +125,9 @@ class AddStudent(BaseModel):
 
 class AboutStudent(BaseModel):
     student = models.ForeignKey(Students,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.student)
 
 
 class EditStudent(BaseModel):
